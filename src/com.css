@@ -1,0 +1,397 @@
+*{margin:0;padding: 0;box-sizing: border-box;
+  font-family: 'Josefin Slab', serif;
+
+  }
+  :root {
+    --primary: #029adb;
+    --secondary: aliceblue;
+  }
+
+html { font-size: 10px; }
+body{background-color: black;}
+
+.mainDiv{
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+}
+
+.headings{
+  text-align: center;
+  color: var(--secondary);
+  margin-top: 4rem;
+  font-size:xx-large;
+}
+.socialUpwards a{
+  text-decoration: none;
+  color: var(--primary);
+}
+.socialLinks{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  bottom: 5rem;
+  right: 5rem;
+  color: var(--primary);
+}
+.socialLinks:hover .socialUpwards{
+  display: flex;
+  flex-direction: column;
+}
+.socialBtn{
+  color: var(--primary);
+  background-color: black;
+}
+.socialUpwards{
+  display: none;
+  margin-bottom: 2rem;
+}
+
+/*Navigation Bar*/
+
+.header{
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0.2rem 0.2rem 0.6rem var(--primary);
+
+  
+}
+.nav-item{
+  margin-right: 3rem;
+  text-decoration: none;
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+}
+
+.navActive{
+  color: var(--primary);
+}
+/*About */
+
+.aboutMain{
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.imgParaAbout{ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  padding: 1rem;
+  line-height: 4rem;
+}
+.aboutImg{
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem;
+  
+}
+.quotes{
+  position: fixed;
+  bottom:16rem;
+  left:-6.5rem;
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-left: 10rem;
+  font-weight: bold;
+  line-height: 3.5rem;
+}
+
+.aboutImg img{
+  width: 25rem;
+  height: 25rem;
+  border-radius: 50rem;
+  padding: 1rem;
+}
+
+.aboutPara{
+  font-size: 3rem;
+  padding: 2rem;
+}
+
+/***************************Skills************************************/
+.SkillsContainer{
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+.SkillCategoryDiv{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 8rem;
+}
+
+.skillBarDiv{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 1.5rem;
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0.2rem 0.2rem 0.6rem var(--primary);
+}
+.skillBarDiv h3{
+  font-size: 2rem;
+  color: var(--secondary);
+}
+
+
+.SkillCatTitle{
+  margin: 2rem;
+  color: var(--primary);
+  margin-left: 4rem;
+  font-size: 3rem;
+  font-weight: bold;
+}
+progress{
+  font-size: 2rem;
+}
+
+/**************Experience*****/
+.ExperienceMain{
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+
+.ExperienceInner{
+  width: 55rem;
+  height: 50rem;
+  color: aliceblue;
+  box-shadow: 0.2rem 0.2rem 1rem var(--primary);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  flex:1
+}
+.ExperienceInner h1{
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 2.5rem;
+}
+
+.ExperienceInner p{
+  font-size: 2.2rem;
+  margin: 1rem;
+  line-height: 2.4rem;
+}
+.ExperienceInner span, h1{
+  color: var(--primary);
+  font-weight: bold;  
+}
+
+#whichSlide{
+  color: var(--primary);
+  margin-top: auto;
+}
+.prevBtn, .nextBtn{
+  margin:0.5rem;
+  color: var(--primary);
+}
+
+.prevBtn  {
+  transform: rotate(180deg);
+}
+.prevBtn:hover{
+ cursor: pointer;
+  color: var(--secondary);
+}
+.nextBtn:hover{
+  cursor: pointer;
+  color: var(--secondary);
+}
+
+.MuiSvgIcon-root{
+  font-size: 5rem!important;
+}
+
+/* Projects*************/
+
+.proHead{
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  margin-top: 4rem;
+}
+.proHead h1{
+  margin-left: 7rem;
+  font-weight: bold;
+  font-size: 3rem;
+
+}
+
+.ProjectCategoryContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 80vh;
+}
+
+.projCard{
+  width: 40rem;
+  height: 40rem;
+  text-align: center;
+  color: aliceblue;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
+
+}
+.projCard h1{ 
+  font-size: 2.5rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+.Repo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2rem;
+  width: 15rem;
+  justify-content: center;
+  box-shadow: 0.2rem 0.2rem 1rem var(--primary);
+  border-radius: 1.5rem;
+  padding: 0.8rem;
+}
+.Repo:hover{
+  transform: scale(1.5);
+  background-color: var(--secondary);
+}
+
+.projCard a{
+  margin: 0.4rem;
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--primary);
+}
+.projCard p{ 
+  font-size: 1.7rem;
+  margin-top: 1rem;
+  text-align: center;
+  line-height: 3rem;
+  padding:2rem;
+}
+.prevPro, .nextPro{
+  color: var(--primary);
+  height: auto;
+  width: auto;
+  font-size: 3rem;
+  padding: 1rem;
+  background: transparent;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+
+}
+.prevPro:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  color: var(--secondary);
+}
+.nextPro:hover{
+  cursor: pointer;
+  transform: scale(1.5);
+  color: var(--secondary);
+}
+
+/**************************/
+/***********Achievement*******************/
+.AchievementContainer {
+  display: flex;
+  flex-direction: column;
+ }
+.Achievementhead{
+  padding: 2rem;
+  height: 10vh;
+  width: 100vw;
+  margin-top: 4rem;
+}
+.Achievementhead h1{
+  font-size: 2.5rem;
+  margin-left: 3rem;
+  font-weight: bold;
+}
+.AchievementCategoryParent{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 70vh;
+  width: 100vw;
+}
+
+.AchievementChild {
+  padding: 1.5rem;
+  margin: 1.5rem; 
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.AchievementCategory{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.AchievementChild img{
+  margin-top: 2rem;
+  height: 9rem;
+  width: 9rem;
+}
+.AchievementChild img:hover{
+transform: scale(1.5);
+}
+.Achievementmorebtn,.Achievementlessbtn{
+  margin:4rem;
+  font-size: 2rem;
+  color: var(--primary);
+  background: transparent;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+}
+.Achievementmorebtn:hover{
+  transform: scale(1.5);
+  color: var(--secondary);
+  background-color: var(--primary);
+  cursor: pointer;
+  border-radius: 2rem;
+  padding: 0.5rem;
+}
+.Achievementlessbtn:hover{
+  transform: scale(1.5);
+  color: var(--secondary);
+  background-color: var(--primary);
+  cursor: pointer;
+  border-radius: 2rem;
+  padding: 0.5rem;
+}
+
+@media (max-width: 768px){
+  .quotes{
+    bottom:12rem;
+    left:-8.5rem;
+  }
+}

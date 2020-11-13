@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/portfolio/static/css/main.25717bfe.chunk.css",
+    "main.js": "/portfolio/static/js/main.b193df8b.chunk.js",
+    "main.js.map": "/portfolio/static/js/main.b193df8b.chunk.js.map",
+    "runtime-main.js": "/portfolio/static/js/runtime-main.5676a5cc.js",
+    "runtime-main.js.map": "/portfolio/static/js/runtime-main.5676a5cc.js.map",
+    "static/js/2.7fc52d41.chunk.js": "/portfolio/static/js/2.7fc52d41.chunk.js",
+    "static/js/2.7fc52d41.chunk.js.map": "/portfolio/static/js/2.7fc52d41.chunk.js.map",
+    "index.html": "/portfolio/index.html",
+    "precache-manifest.ecb10c685edc191c19bc28b3610b5235.js": "/portfolio/precache-manifest.ecb10c685edc191c19bc28b3610b5235.js",
+    "service-worker.js": "/portfolio/service-worker.js",
+    "static/css/main.25717bfe.chunk.css.map": "/portfolio/static/css/main.25717bfe.chunk.css.map",
+    "static/js/2.7fc52d41.chunk.js.LICENSE.txt": "/portfolio/static/js/2.7fc52d41.chunk.js.LICENSE.txt",
+    "static/media/bizmerlin.png": "/portfolio/static/media/bizmerlin.dbbe9989.png",
+    "static/media/chatapp.jpg": "/portfolio/static/media/chatapp.36e59bb4.jpg",
+    "static/media/dp.jpg": "/portfolio/static/media/dp.cfd1aa85.jpg",
+    "static/media/dutchgovt.png": "/portfolio/static/media/dutchgovt.c4d1918b.png",
+    "static/media/fastmail.png": "/portfolio/static/media/fastmail.cefd4bf9.png",
+    "static/media/google.png": "/portfolio/static/media/google.2de36850.png",
+    "static/media/notesapp.JPG": "/portfolio/static/media/notesapp.41274126.JPG",
+    "static/media/vista.png": "/portfolio/static/media/vista.d5a88e67.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5676a5cc.js",
+    "static/js/2.7fc52d41.chunk.js",
+    "static/css/main.25717bfe.chunk.css",
+    "static/js/main.b193df8b.chunk.js"
+  ]
+}
