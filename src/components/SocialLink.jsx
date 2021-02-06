@@ -11,8 +11,8 @@ const SocialLink=()=>{
     const stylesize=
     {
         smallsize:{
-            width:54,
-            height:54
+            width:50,
+            height:50
             
         }
 

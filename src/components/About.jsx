@@ -9,6 +9,7 @@ const About=()=>{
             <div className="imgParaAbout">
                 <div className="aboutImg">
                     <img src={dp} alt=""></img>
+                    <p ><q>Develop as a Hacker.<br/>Hack as a Developer</q></p>
                 </div>
                 <div className="aboutPara">
                     <p>
@@ -18,9 +19,6 @@ const About=()=>{
                         I am very much passionate of taking up new Developing Challenges and trying out new things that revolve around some technology.
                     </p>
                 </div>
-            </div>
-            <div>
-            <p className="quotes"><q>Develop as a Hacker.<br/>Hack as a Developer</q></p>
             </div>
         </div>
     )

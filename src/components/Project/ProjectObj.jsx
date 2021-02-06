@@ -2,6 +2,24 @@
 const proj = {
     "Web Development":[
         {
+            title:"Ekagrata",
+            img:"",
+            desc:"Ekagrata is the web app which helps students to increase their level of concentration while solving assignments.",
+            linkPro:"https://github.com/manralhemant10/ekagrata"
+        },
+        {
+            title:"UniJudge",
+            img:"",
+            desc:"A web application that determine the originality of project submissions on Devpost.",
+            linkPro:"https://github.com/manralhemant10/unijudge"
+        },
+        {
+            title:"Practice problems",
+            img:"",
+            desc:"A Web App with all the data from codechef with additonal features.",
+            linkPro:"https://github.com/manralhemant10/codechef_hackathon"
+        },
+        {
             title:"Chat Web App",
             img:require('../../images/Projects/chatapp.jpg'),
             desc:"A chat Web App build using MERN stack and socket.io which lets user in same room to chat with each other.",
@@ -17,7 +35,7 @@ const proj = {
             title:"Portfolio Website",
             img:"",
             desc:"This is my portfolio website build using React",
-            linkPro:"http://github.com"
+            linkPro:"https://github.com/manralhemant10/portfolio"
         },
      
     ],
