@@ -31,35 +31,7 @@ const AchievementObj ={
             logo:require("../../images/Achievements/dutchgovt.png"),
             hoflink:""
         },
-        {
-            company_name:"Google",
-            logo:"",
-            hoflink:""
-        },
-        {
-            company_name:"Google",
-            logo:"",
-            hoflink:""
-        },
-        {
-            company_name:"Google",
-            logo:"",
-            hoflink:""
-        },   {
-            company_name:"Google",
-            logo:"",
-            hoflink:""
-        },
-        {
-            company_name:"Google",
-            logo:"",
-            hoflink:""
-        },
-        {
-            company_name:"Google",
-            logo:"",
-            hoflink:""
-        },
+        
        
     ],
    

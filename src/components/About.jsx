@@ -14,9 +14,9 @@ const About=()=>{
                 <div className="aboutPara">
                     <p>
                         Hello <span className="hiemoji">👋</span>,<br/>
-                        I am Hemant, a Full Stack Developer enthusiast with an experience 
-                        in Bug hunting for more then a year,
-                        I am very much passionate of taking up new Developing Challenges and trying out new things that revolve around some technology.
+                        I am Hemant, a Full Stack Developer currently working in oracle, I also have experience 
+                        in Bug hunting of more then a year
+                        I am very much passionate about MERN stack and of taking up new Developing Challenges and trying out new things that revolve around some technology.
                     </p>
                 </div>
             </div>
