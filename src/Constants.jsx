@@ -1,4 +1,4 @@
-let CORS_PROXY= 'http://localhost:8000',
+let CORS_PROXY= 'https://thingproxy.freeboard.io/fetch',
  LEETCODE_USER = 'manral',
  LEETCODE_GRAPHQL = 'https://leetcode.com/graphql',
  STOPSTALK = {
