@@ -6,11 +6,11 @@ import HeatMapContainer from './HeatMapContainer'
 
 const getExternalApiData = (url,body)=>{
     if(body){
-        return axios.post(constants.CORS_PROXY+"/"+url,body).then((res)=>{
+        return axios.post(constants.CORS_PROXY+"/?url="+Buffer.from(url).toString('base64'),body).then((res)=>{
             return res.data
         })
     }else{
-        return axios.get(constants.CORS_PROXY+"/"+url).then((res)=>{
+        return axios.get(constants.CORS_PROXY+"/?url="+Buffer.from(url).toString('base64')).then((res)=>{
             return res.data
         })
     }
