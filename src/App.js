@@ -6,7 +6,7 @@ import Skills from './components/Skill/Skills'
 import Experience from './components/Experience/Experience'
 import Projects from './components/Project/Projects';
 import Achievements from './components/Achievement/Achievements';
-import SocialLink from './components/SocialLink';
+import CodingProfile from './components/CodingProfile/CodingProfile';
 
 function App() {
   return (
@@ -18,9 +18,10 @@ function App() {
           <Route  path="/experience" component={Experience}/>
           <Route  path="/projects" component={Projects}/>
           <Route  path="/achievements" component={Achievements}/>
+          <Route path="/codingprofile" component={CodingProfile}/>
           <Route path="/" component={About}/>
         </Switch>
-      <SocialLink/>
+      
     </div>
     
   );

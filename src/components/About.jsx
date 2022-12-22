@@ -1,5 +1,6 @@
 import React from 'react'
 import dp from '../images/dp.jpg'
+import SocialLink from './SocialLink';
 
 
 const About=()=>{
@@ -20,6 +21,7 @@ const About=()=>{
                     </p>
                 </div>
             </div>
+            <SocialLink/>
         </div>
     )
 }
