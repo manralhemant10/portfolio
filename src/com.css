@@ -36,7 +36,9 @@ overflow: hidden;}
 
 
 
-
+.expDesc{
+  overflow: auto;
+}
 .mainDiv{
   background-color: black;
   height: 100vh;
