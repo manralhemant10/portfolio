@@ -15,8 +15,8 @@ const About=()=>{
                 <div className="aboutPara">
                     <p>
                         Hello <span className="hiemoji">👋</span>,<br/>
-                        I am Hemant, currently working at Oracle as Full Stack Developer with keen intereset 
-                        in React.js and Node.js and I am Constantly exploring these technologies and also 
+                        I am Hemant Singh Manral, currently working in Oracle as a Full Stack Developer with keen interest 
+                        in React.js and Node.js, I have hands-on experience of these technologies and also 
                         working on personal projects using the same.
                         Apart from this I have a good experience as a Bug Bounty Hunter, so My development
                         always have a

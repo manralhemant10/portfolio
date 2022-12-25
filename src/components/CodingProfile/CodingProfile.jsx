@@ -2,17 +2,21 @@ import React,{useEffect, useState} from 'react'
 import axios from 'axios'
 import constants from '../../Constants'
 import HeatMapContainer from './HeatMapContainer'
-
+import Spinner from '../Spinner'
 
 const getExternalApiData = (url,body)=>{
     if(body){
-        return axios.post(constants.CORS_PROXY+"/?url="+Buffer.from(url).toString('base64'),body).then((res)=>{
+        return axios.post(constants.CORS_PROXY+"/?url="+Buffer.from(url).toString('base64'),body)
+        .then((res)=>{
             return res.data
         })
+        .catch(()=>{throw new Error(url)})
     }else{
-        return axios.get(constants.CORS_PROXY+"/?url="+Buffer.from(url).toString('base64')).then((res)=>{
+        return axios.get(constants.CORS_PROXY+"/?url="+Buffer.from(url).toString('base64'))
+        .then((res)=>{
             return res.data
         })
+        .catch(()=>{throw new Error(url)})
     }
  
 }
@@ -55,6 +59,7 @@ const CodingProfile=()=>{
         return {"query":"\n    query userProfileCalendar($username: String!, $year: Int) {\n  matchedUser(username: $username) {\n    userCalendar(year: $year) {\n      activeYears\n      streak\n      totalActiveDays\n      dccBadges {\n        timestamp\n        badge {\n          name\n          icon\n        }\n      }\n      submissionCalendar\n    }\n  }\n}\n    ","variables":{"username":`${constants.LEETCODE_USER}`,"year":`${yearparam}`}}
 
     }
+    const [loading, setLoading] = useState(true);
     const [totalSolvedQues,setTotalSolvedQues]= useState(0)
     const [solvQuesPlatWise,setSolvQuesPlatWise]= useState({
         leetcode: 0,
@@ -72,117 +77,127 @@ const CodingProfile=()=>{
 
     useEffect(()=>{
         const getAllCodingData  = async()=>{
-            let totalSolved = 0,
-            platWiseQues = {
-                leetcode: 0,
-                hackerrank: 0,
-                hackerearth:0,
-                codeforces:0,
-                atcoder:0,
-                codechef:0
-            },
-            tagMap = new Map()
-            let leetuserPro = await getExternalApiData(constants.LEETCODE_GRAPHQL,leetUserProfileQuery)
-            totalSolved += leetuserPro.data.matchedUser.submitStats.acSubmissionNum[0].count
-            platWiseQues.leetcode=totalSolved
-            //setTotalSolvedQues(totalSolved)
-            let stopStalkRes = await getExternalApiData(constants.STOPSTALK.USER_STATS_URL)
-            totalSolved += stopStalkRes.solved_problems_count
-            platWiseQues.atcoder = stopStalkRes.solved_counts.AtCoder
-            platWiseQues.hackerrank	= stopStalkRes.solved_counts.HackerRank
-            platWiseQues.hackerearth = stopStalkRes.solved_counts.HackerEarth
-            platWiseQues.codeforces = stopStalkRes.solved_counts.CodeForces
-            platWiseQues.codechef = stopStalkRes.solved_counts.CodeChef
+            try{
+                let totalSolved = 0,
+                platWiseQues = {
+                    leetcode: 0,
+                    hackerrank: 0,
+                    hackerearth:0,
+                    codeforces:0,
+                    atcoder:0,
+                    codechef:0
+                },
+                tagMap = new Map()
+                let leetuserPro = await getExternalApiData(constants.LEETCODE_GRAPHQL,leetUserProfileQuery)
+                totalSolved += leetuserPro.data.matchedUser.submitStats.acSubmissionNum[0].count
+                platWiseQues.leetcode=totalSolved
+                //setTotalSolvedQues(totalSolved)
+                let stopStalkRes = await getExternalApiData(constants.STOPSTALK.USER_STATS_URL)
+                totalSolved += stopStalkRes.solved_problems_count
+                platWiseQues.atcoder = stopStalkRes.solved_counts.AtCoder
+                platWiseQues.hackerrank	= stopStalkRes.solved_counts.HackerRank
+                platWiseQues.hackerearth = stopStalkRes.solved_counts.HackerEarth
+                platWiseQues.codeforces = stopStalkRes.solved_counts.CodeForces
+                platWiseQues.codechef = stopStalkRes.solved_counts.CodeChef
 
-            setTotalSolvedQues(totalSolved)
-            setSolvQuesPlatWise({...platWiseQues})
-           
-            let leetSkill = await getExternalApiData(constants.LEETCODE_GRAPHQL,leetSkillStatsQuery)
-            leetSkill.data.matchedUser.tagProblemCounts.advanced.forEach((tagsObj)=>{
-                let tagname = convertTag(tagsObj.tagName)
-                let tagExist = tagMap.get(tagname)
-                if(tagExist){
-                    tagMap.set(tagname,tagExist+tagsObj.problemsSolved)
-
-                }else{
-                    tagMap.set(tagname,tagsObj.problemsSolved)
-                }
- 
-            })
-            leetSkill.data.matchedUser.tagProblemCounts.intermediate.forEach((tagsObj)=>{
-                let tagname = convertTag(tagsObj.tagName)
-                let tagExist = tagMap.get(tagname)
-                if(tagExist){
-                    tagMap.set(tagname,tagExist+tagsObj.problemsSolved)
-
-                }else{
-                    tagMap.set(tagname,tagsObj.problemsSolved)
-                }
- 
-            })
-            leetSkill.data.matchedUser.tagProblemCounts.fundamental.forEach((tagsObj)=>{
-                let tagname = convertTag(tagsObj.tagName)
-                let tagExist = tagMap.get(tagname)
-                if(tagExist){
-                    tagMap.set(tagname,tagExist+tagsObj.problemsSolved)
-
-                }else{
-                    tagMap.set(tagname,tagsObj.problemsSolved)
-                }
- 
-            })
-
-            let stopStalkTagsRes = await getExternalApiData(constants.STOPSTALK.TAGS_URL)
-            for(const tags in stopStalkTagsRes.solved_problems){
-                    let ssTagsArr= stopStalkTagsRes.solved_problems[tags]
-                    let tagname = convertTag(tags)
-                    let tagExist = tagMap.get(tagname)
-                    if(tagname==="Miscellaneous")
-                    if(tagExist){
-                        tagMap.set(tagname,tagExist+ssTagsArr.length)
-
-                    }else{
-                        tagMap.set(tagname,ssTagsArr.length)
-                    }
- 
-              
-            }
-            const yearsToListTemp=[]
-            for(const dt in stopStalkRes.calendar_data){
-                createHeatData(dt, stopStalkRes.calendar_data[dt].AC, yearsToListTemp, heatDataTemp)
-            }
-            for(const year of yearsToListTemp){
-                let res = await getExternalApiData(constants.LEETCODE_GRAPHQL,leetYearWiseHeats(year))
-                let calObj = JSON.parse(res.data.matchedUser.userCalendar.submissionCalendar)
-                for(const calTimestamp in calObj){
-                    createHeatData(calTimestamp*1000, parseInt(calObj[calTimestamp]), yearsToListTemp, heatDataTemp)
-                  
-                }
-            }
-           
-            yearsToListTemp.sort()
-            let streakCnt=0,maxSt=0
-            for(const year of yearsToListTemp){
-                for(const day of heatDataTemp[year]){
-                    if(day===0){
-                        maxSt = Math.max(maxSt, streakCnt)
-                        streakCnt=0
-                    }else{
-                        streakCnt++
-                    }
-                }
-            }
-            setMaxStreak(maxSt)
-            setHeatData({...heatDataTemp})
-            setYearsToList([...yearsToListTemp])
-            setTagMapDisp(new Map(tagMap))
+                setTotalSolvedQues(totalSolved)
+                setSolvQuesPlatWise({...platWiseQues})
             
+                let leetSkill = await getExternalApiData(constants.LEETCODE_GRAPHQL,leetSkillStatsQuery)
+                leetSkill.data.matchedUser.tagProblemCounts.advanced.forEach((tagsObj)=>{
+                    let tagname = convertTag(tagsObj.tagName)
+                    let tagExist = tagMap.get(tagname)
+                    if(tagExist){
+                        tagMap.set(tagname,tagExist+tagsObj.problemsSolved)
+
+                    }else{
+                        tagMap.set(tagname,tagsObj.problemsSolved)
+                    }
+    
+                })
+                leetSkill.data.matchedUser.tagProblemCounts.intermediate.forEach((tagsObj)=>{
+                    let tagname = convertTag(tagsObj.tagName)
+                    let tagExist = tagMap.get(tagname)
+                    if(tagExist){
+                        tagMap.set(tagname,tagExist+tagsObj.problemsSolved)
+
+                    }else{
+                        tagMap.set(tagname,tagsObj.problemsSolved)
+                    }
+    
+                })
+                leetSkill.data.matchedUser.tagProblemCounts.fundamental.forEach((tagsObj)=>{
+                    let tagname = convertTag(tagsObj.tagName)
+                    let tagExist = tagMap.get(tagname)
+                    if(tagExist){
+                        tagMap.set(tagname,tagExist+tagsObj.problemsSolved)
+
+                    }else{
+                        tagMap.set(tagname,tagsObj.problemsSolved)
+                    }
+    
+                })
+
+                let stopStalkTagsRes = await getExternalApiData(constants.STOPSTALK.TAGS_URL)
+                for(const tags in stopStalkTagsRes.solved_problems){
+                        let ssTagsArr= stopStalkTagsRes.solved_problems[tags]
+                        let tagname = convertTag(tags)
+                        let tagExist = tagMap.get(tagname)
+                        if(tagname==="Miscellaneous")
+                        if(tagExist){
+                            tagMap.set(tagname,tagExist+ssTagsArr.length)
+
+                        }else{
+                            tagMap.set(tagname,ssTagsArr.length)
+                        }
+    
+                
+                }
+                const yearsToListTemp=[]
+                for(const dt in stopStalkRes.calendar_data){
+                    createHeatData(dt, stopStalkRes.calendar_data[dt].AC, yearsToListTemp, heatDataTemp)
+                }
+                for(const year of yearsToListTemp){
+                    let res = await getExternalApiData(constants.LEETCODE_GRAPHQL,leetYearWiseHeats(year))
+                    let calObj = JSON.parse(res.data.matchedUser.userCalendar.submissionCalendar)
+                    for(const calTimestamp in calObj){
+                        createHeatData(calTimestamp*1000, parseInt(calObj[calTimestamp]), yearsToListTemp, heatDataTemp)
+                    
+                    }
+                }
+            
+                yearsToListTemp.sort()
+                let streakCnt=0,maxSt=0
+                for(const year of yearsToListTemp){
+                    for(const day of heatDataTemp[year]){
+                        if(day===0){
+                            maxSt = Math.max(maxSt, streakCnt)
+                            streakCnt=0
+                        }else{
+                            streakCnt++
+                        }
+                    }
+                }
+                setMaxStreak(maxSt)
+                setHeatData({...heatDataTemp})
+                setYearsToList([...yearsToListTemp])
+                setTagMapDisp(new Map(tagMap))
+                setLoading(false)
+            }
+            catch(err){
+                if(err===constants.LEETCODE_GRAPHQL){
+
+                }else if(err===constants.LEETCODE_USER){
+
+                }
+            }   
         }
         getAllCodingData()
     },[])
     return(
         <>
-        <div className='codingContainer'>
+        { loading?(<Spinner/>):null}
+                <div className='codingContainer'>
             <div className='prosummContainer'>
                 <div className='totalContainer'>
                     <div className='keyValueContainer'>
@@ -223,6 +238,8 @@ const CodingProfile=()=>{
             }
             </div>
         </div>
+          
+        
 
 
         
