@@ -423,6 +423,7 @@ transform: scale(1.5);
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
+  width: 80vw;
 
 }
 .prosummContainer > div {
@@ -451,6 +452,7 @@ transform: scale(1.5);
 .keyValueContainer >div{
   padding: 1rem;
   text-align: center;
+  word-wrap: break-word;
 }
 .keyHeading{
   color: var(--primary);
@@ -461,6 +463,7 @@ transform: scale(1.5);
 .heatMapContainer{
   font-size: 2rem;
   color: var(--primary);
+
 }
 .dropDown{
   color: var(--primary);
@@ -468,11 +471,24 @@ transform: scale(1.5);
   background: transparent;
   box-shadow: 0.2rem 0.2rem 0.6rem var(--primary);
 }
-.heatMapContainer>div>div{
+/* .heatMapContainer>div>div{
   font-size: 2rem;
   border-radius: 1.5rem;
   border-color: black;
   box-shadow: 0.2rem 0.2rem 0.6rem var(--primary);
+} */
+.heatmapDivWrapper>div{
+  font-size: 2rem;
+  width: 80vw;
+  overflow: auto;
+ }
+.heatmapDivWrapper>div>div{
+  border-color: black;
+  box-shadow: 0.2rem 0.2rem 0.6rem var(--primary);
+  border-radius: 1.5rem;
+
+}
+.heatmapDivWrapper>div>div>ul{
 }
 .codingContainer{
   display: flex;
@@ -574,5 +590,17 @@ transform: scale(1.5);
    position: relative;
    left: 1.8rem;
  }
-
+ /* .heatmapDivWrapper>div>div{
+  font-size: 2rem;
+  border-radius: 1.5rem;
+  border-color: red;
+  box-shadow: 0.2rem 0.2rem 0.6rem var(--primary);
+  overflow: auto;
+} */
+.platContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-size: 3rem;
+}
 }

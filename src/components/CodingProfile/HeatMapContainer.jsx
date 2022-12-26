@@ -27,7 +27,7 @@ const HeatMapContainer = (props)=>{
                 })
             }
             </select>
-
+            <div className='heatmapDivWrapper'>
             <Heatmap 
                 colour={['#232423','#2ec730', '#179c19', '#0b700d', '#024d03', '#013b01']} 
                 squareNumber={squareNumber} 
@@ -35,6 +35,7 @@ const HeatMapContainer = (props)=>{
                 squareGap='4px'
                 squareSize='15px'
             />
+            </div>
         </div>
     )
 }
