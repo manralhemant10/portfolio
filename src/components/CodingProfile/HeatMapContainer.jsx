@@ -7,16 +7,16 @@ const dayOfYear = date =>{
 const HeatMapContainer = (props)=>{
    const {yearsToList, heatData} = props
    const currDate = new Date()
-   const [year, setYear] = useState(currDate.getFullYear())
-   const [squareNumber,setSquareNumber] = useState(dayOfYear(currDate))
+   const [year, setYear] = useState(currDate.getFullYear().toString())
+   const [squareNumber,setSquareNumber] = useState(365)
    const onYearChange = (e)=>{
     setYear(e.target.value)
-    if(year===currDate.getFullYear().toString()){
-        setSquareNumber(dayOfYear(currDate))
-    }
-    else{
-        setSquareNumber(365)
-    }
+    // if(year===currDate.getFullYear().toString()){
+    //     setSquareNumber(dayOfYear(currDate))
+    // }
+    // else{
+    //     setSquareNumber(365)
+    // }
    }
     return (
         <div className='heatMapContainer'>
