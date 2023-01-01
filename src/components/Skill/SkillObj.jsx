@@ -6,13 +6,13 @@ const SkillObj  ={
             percent : 90
         },
         {
-            name : "Python",
-            percent : 70
+            name :"Javascript",
+            percent : 90
         },
         {
-            name :"Javascript",
-            percent : 60
-        },
+            name :"TypeScript",
+            percent : 80
+        }
    ],
    "Web Development":[
         {
@@ -29,10 +29,13 @@ const SkillObj  ={
         },
         {
             name:"NodeJs",
-            percent: 70
+            percent: 90
         },{
             name:"Expressjs",
-            percent: 70
+            percent: 90
+        },{
+            name:"MicroServices",
+            percent: 90
         }
     ],
     "Databases":[

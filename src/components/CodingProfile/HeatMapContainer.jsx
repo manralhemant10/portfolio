@@ -9,13 +9,14 @@ const HeatMapContainer = (props)=>{
    const currDate = new Date()
    const [year, setYear] = useState(currDate.getFullYear())
    const [squareNumber,setSquareNumber] = useState(dayOfYear(currDate))
-   
    const onYearChange = (e)=>{
     setYear(e.target.value)
-    if(year===currDate.getFullYear())
-    setSquareNumber(dayOfYear(currDate))
-    else
-    setSquareNumber(365)
+    if(year===currDate.getFullYear().toString()){
+        setSquareNumber(dayOfYear(currDate))
+    }
+    else{
+        setSquareNumber(365)
+    }
    }
     return (
         <div className='heatMapContainer'>

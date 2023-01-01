@@ -488,7 +488,11 @@ transform: scale(1.5);
   border-radius: 1.5rem;
 
 }
-.heatmapDivWrapper>div>div>ul{
+.platHidden{
+  display: none;
+}
+#Others:hover +.platHidden {
+  display: block;
 }
 .codingContainer{
   display: flex;

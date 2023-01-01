@@ -38,16 +38,15 @@ const convertTag = (tagName)=>{
 const dayOfYear = date =>{
     return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
 }
-const createHeatData = (dt,cnt, yearsToListTemp,heatDataTemp )=>{
+const createHeatData = (dt,cnt,heatDataTemp )=>{
     
                 const dateObj = new Date(dt)
                 if(dateObj < new Date("01-01-2020"))return
                 const heatYear = dateObj.getFullYear()
                 if( !(heatYear in heatDataTemp)){
-                    yearsToListTemp.push(heatYear)
                     heatDataTemp[heatYear] = new Array(365).fill(0);
                 }
-                heatDataTemp[heatYear][dayOfYear(dateObj)]+=cnt
+                heatDataTemp[heatYear][dayOfYear(dateObj)-1]+=cnt
 }
 
 const CodingProfile=()=>{   
@@ -61,15 +60,7 @@ const CodingProfile=()=>{
     }
     const [loading, setLoading] = useState(true);
     const [totalSolvedQues,setTotalSolvedQues]= useState(0)
-    const [solvQuesPlatWise,setSolvQuesPlatWise]= useState({
-        leetcode: 0,
-        hackerrank: 0,
-        hackerearth:0,
-        codeforces:0,
-        atcoder:0,
-        codechef:0,
-        gfg:0
-    })
+    const [solvQuesPlatWise,setSolvQuesPlatWise]= useState({})
     const [heatData,setHeatData] = useState(new Array(365))
     const [yearsToList, setYearsToList] = useState([])
     const [tagMapDisp, setTagMapDisp] = useState(new Map())
@@ -80,28 +71,26 @@ const CodingProfile=()=>{
             try{
                 let totalSolved = 0,
                 platWiseQues = {
-                    leetcode: 0,
-                    hackerrank: 0,
-                    hackerearth:0,
-                    codeforces:0,
-                    atcoder:0,
-                    codechef:0
+                    LeetCode: 0
                 },
+                platWiseQuesOther={},
                 tagMap = new Map()
                 let leetuserPro = await getExternalApiData(constants.LEETCODE_GRAPHQL,leetUserProfileQuery)
                 totalSolved += leetuserPro.data.matchedUser.submitStats.acSubmissionNum[0].count
-                platWiseQues.leetcode=totalSolved
+                platWiseQues.LeetCode=totalSolved
                 //setTotalSolvedQues(totalSolved)
                 let stopStalkRes = await getExternalApiData(constants.STOPSTALK.USER_STATS_URL)
                 totalSolved += stopStalkRes.solved_problems_count
-                platWiseQues.atcoder = stopStalkRes.solved_counts.AtCoder
-                platWiseQues.hackerrank	= stopStalkRes.solved_counts.HackerRank
-                platWiseQues.hackerearth = stopStalkRes.solved_counts.HackerEarth
-                platWiseQues.codeforces = stopStalkRes.solved_counts.CodeForces
-                platWiseQues.codechef = stopStalkRes.solved_counts.CodeChef
-
+                for(const [platName, totSol] of Object.entries(stopStalkRes.solved_counts)){
+                    if(totSol!==0){
+                        platWiseQues[platName] = totSol
+                    }
+                }
                 setTotalSolvedQues(totalSolved)
-                setSolvQuesPlatWise({...platWiseQues})
+                setSolvQuesPlatWise(Object.fromEntries(
+                    Object.entries(platWiseQues).sort(([,a],[,b]) => b-a)
+                ))
+                
             
                 let leetSkill = await getExternalApiData(constants.LEETCODE_GRAPHQL,leetSkillStatsQuery)
                 leetSkill.data.matchedUser.tagProblemCounts.advanced.forEach((tagsObj)=>{
@@ -153,20 +142,24 @@ const CodingProfile=()=>{
     
                 
                 }
-                const yearsToListTemp=[]
                 for(const dt in stopStalkRes.calendar_data){
-                    createHeatData(dt, stopStalkRes.calendar_data[dt].AC, yearsToListTemp, heatDataTemp)
+                    createHeatData(dt, stopStalkRes.calendar_data[dt].AC, heatDataTemp)
+                }
+                let yearsToListTemp=[]
+
+                let stYear = "2020", curYear = (new Date()).getFullYear().toString();
+                for(let i = stYear;i<=curYear;i++){
+                    yearsToListTemp.push(i);
                 }
                 for(const year of yearsToListTemp){
                     let res = await getExternalApiData(constants.LEETCODE_GRAPHQL,leetYearWiseHeats(year))
                     let calObj = JSON.parse(res.data.matchedUser.userCalendar.submissionCalendar)
                     for(const calTimestamp in calObj){
-                        createHeatData(calTimestamp*1000, parseInt(calObj[calTimestamp]), yearsToListTemp, heatDataTemp)
+                        createHeatData(calTimestamp*1000, parseInt(calObj[calTimestamp]), heatDataTemp)
                     
                     }
                 }
             
-                yearsToListTemp.sort()
                 let streakCnt=0,maxSt=0
                 for(const year of yearsToListTemp){
                     for(const day of heatDataTemp[year]){
@@ -213,15 +206,16 @@ const CodingProfile=()=>{
                     {
                         Object.keys(solvQuesPlatWise).map((plat)=>{
                             return (
-                                <div className='keyValueContainer'>
+                                <>
+                                <div className='keyValueContainer' key={plat} id ={plat}>
                                     <div className='keyHeading'>{plat}</div>
                                     <div className='valueHeading'>{solvQuesPlatWise[plat]}</div>
-                                </div>
+                                </div>                              
+                                          
+                                </>
                             )
                         })                
-
-
-                    }
+                    }                 
                 </div>
                 <HeatMapContainer yearsToList={yearsToList} heatData={heatData}/>
 
