@@ -1,9 +1,10 @@
-import React,{useEffect, useState,useContext} from 'react'
+import React,{ useState} from 'react'
 import SelectedtagLook from './SelectedtagLook'
+import constants from '../../Constants'
 
 const Search = (props)=>{
     const [inputvalue, setInputvalue] = useState("")
-    const [tags,setTags] = useState(["nodejs","reactjs"])
+    const [tags,setTags] = useState(constants.techTags)
     const [showSelectedTags, setShowSelectedTags]=useState([])
     
     const inputChange=(event)=>{
