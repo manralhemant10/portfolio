@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/portfolio/static/css/main.cad567ab.chunk.css",
-    "main.js": "/portfolio/static/js/main.4b79752e.chunk.js",
-    "main.js.map": "/portfolio/static/js/main.4b79752e.chunk.js.map",
+    "main.js": "/portfolio/static/js/main.448adab0.chunk.js",
+    "main.js.map": "/portfolio/static/js/main.448adab0.chunk.js.map",
     "runtime-main.js": "/portfolio/static/js/runtime-main.5676a5cc.js",
     "runtime-main.js.map": "/portfolio/static/js/runtime-main.5676a5cc.js.map",
-    "static/js/2.42929aef.chunk.js": "/portfolio/static/js/2.42929aef.chunk.js",
-    "static/js/2.42929aef.chunk.js.map": "/portfolio/static/js/2.42929aef.chunk.js.map",
+    "static/js/2.3ad1fb1b.chunk.js": "/portfolio/static/js/2.3ad1fb1b.chunk.js",
+    "static/js/2.3ad1fb1b.chunk.js.map": "/portfolio/static/js/2.3ad1fb1b.chunk.js.map",
     "index.html": "/portfolio/index.html",
-    "precache-manifest.65baa02b141242c5a44786f5da98f1c5.js": "/portfolio/precache-manifest.65baa02b141242c5a44786f5da98f1c5.js",
+    "precache-manifest.073e9f3bfb1e0e07a728d8409328a318.js": "/portfolio/precache-manifest.073e9f3bfb1e0e07a728d8409328a318.js",
     "service-worker.js": "/portfolio/service-worker.js",
     "static/css/main.cad567ab.chunk.css.map": "/portfolio/static/css/main.cad567ab.chunk.css.map",
-    "static/js/2.42929aef.chunk.js.LICENSE.txt": "/portfolio/static/js/2.42929aef.chunk.js.LICENSE.txt",
+    "static/js/2.3ad1fb1b.chunk.js.LICENSE.txt": "/portfolio/static/js/2.3ad1fb1b.chunk.js.LICENSE.txt",
     "static/media/bizmerlin.png": "/portfolio/static/media/bizmerlin.dbbe9989.png",
     "static/media/dp.jpg": "/portfolio/static/media/dp.304dfc3e.jpg",
     "static/media/dutchgovt.png": "/portfolio/static/media/dutchgovt.c4d1918b.png",
@@ -22,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.5676a5cc.js",
-    "static/js/2.42929aef.chunk.js",
+    "static/js/2.3ad1fb1b.chunk.js",
     "static/css/main.cad567ab.chunk.css",
-    "static/js/main.4b79752e.chunk.js"
+    "static/js/main.448adab0.chunk.js"
   ]
 }
