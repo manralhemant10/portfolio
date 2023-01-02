@@ -9,18 +9,29 @@ import Search from './Search'
 
 const Projects =()=>{
     const [projObj, setProjObj] = useState([])
+
+    const convertTagStr = (techName)=>{
+        let convertedName = ""
+        for(let ch of techName){
+            ch = ch.toLowerCase()
+            if(ch>='a' && ch<='z'){
+                convertedName+=ch
+            }
+        }
+        return convertedName
+    }
     let callGitHubApi = async(tagsArr)=>{
         let tagsArrLen = tagsArr?tagsArr.length:0
         let tagsSet
         if(tagsArrLen>0){
-            tagsSet = new Set(tagsArr.map((tag)=>tag.toLowerCase()))
+            tagsSet = new Set(tagsArr.map((tag)=>convertTagStr(tag)))
         }
        let projObjTemp=[]
         await axios.get(constants.GITHUB_ALL).then((repoArr)=>{
             repoArr.data.forEach((repoObj)=>{
                 if(tagsArrLen>0){
                     for(const topic of repoObj.topics){
-                        if(tagsSet.has(topic.toLowerCase())){
+                        if(tagsSet.has(convertTagStr(topic))){
                             projObjTemp.push(
                                 {
                                     title:repoObj.name,
