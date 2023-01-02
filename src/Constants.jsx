@@ -18,13 +18,18 @@ TAGS_TO_DISPLAY = {
     strings: 'Strings',
     bitmanipulation: 'Bit Manipulation',
     miscellaneous: 'Miscellaneous'
-}
+},
+GITHUB_ALL = "https://api.github.com/users/manralhemant10/repos"
+
+
 STOPSTALK.USER_STATS_URL = `https://www.stopstalk.com/user/get_stopstalk_user_stats.json?user_id=${STOPSTALK.USER_ID}&custom=False`
 STOPSTALK.TAGS_URL = `https://www.stopstalk.com/user/get_solved_unsolved.json?user_id=${STOPSTALK.USER_ID}&custom=False`
+
 export default {
     CORS_PROXY,
     LEETCODE_USER,
     LEETCODE_GRAPHQL,
     STOPSTALK,
-    TAGS_TO_DISPLAY
+    TAGS_TO_DISPLAY,
+    GITHUB_ALL
 }

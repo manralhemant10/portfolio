@@ -9,8 +9,7 @@ const Styles={
 const ProjectCard = (props)=>{
     return(
         <div className="projCard">
-            <h1>{props.title}</h1>
-           
+            <h1>{props.title}</h1>   
                 <a href={props.link} title="Click to visit the repo" target="_blank">
                     <div className="Repo">
                         <GitHubIcon style={Styles.smallsize} />

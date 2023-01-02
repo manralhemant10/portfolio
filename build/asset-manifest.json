@@ -1,31 +1,29 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.4f29f1c4.chunk.css",
-    "main.js": "/portfolio/static/js/main.86210895.chunk.js",
-    "main.js.map": "/portfolio/static/js/main.86210895.chunk.js.map",
+    "main.css": "/portfolio/static/css/main.cad567ab.chunk.css",
+    "main.js": "/portfolio/static/js/main.0354cac1.chunk.js",
+    "main.js.map": "/portfolio/static/js/main.0354cac1.chunk.js.map",
     "runtime-main.js": "/portfolio/static/js/runtime-main.5676a5cc.js",
     "runtime-main.js.map": "/portfolio/static/js/runtime-main.5676a5cc.js.map",
-    "static/js/2.903f04cd.chunk.js": "/portfolio/static/js/2.903f04cd.chunk.js",
-    "static/js/2.903f04cd.chunk.js.map": "/portfolio/static/js/2.903f04cd.chunk.js.map",
+    "static/js/2.42929aef.chunk.js": "/portfolio/static/js/2.42929aef.chunk.js",
+    "static/js/2.42929aef.chunk.js.map": "/portfolio/static/js/2.42929aef.chunk.js.map",
     "index.html": "/portfolio/index.html",
-    "precache-manifest.2a46f3d0612adad60a589194b9b7f60d.js": "/portfolio/precache-manifest.2a46f3d0612adad60a589194b9b7f60d.js",
+    "precache-manifest.e881aa3f83a75c927100b307dc806e25.js": "/portfolio/precache-manifest.e881aa3f83a75c927100b307dc806e25.js",
     "service-worker.js": "/portfolio/service-worker.js",
-    "static/css/main.4f29f1c4.chunk.css.map": "/portfolio/static/css/main.4f29f1c4.chunk.css.map",
-    "static/js/2.903f04cd.chunk.js.LICENSE.txt": "/portfolio/static/js/2.903f04cd.chunk.js.LICENSE.txt",
+    "static/css/main.cad567ab.chunk.css.map": "/portfolio/static/css/main.cad567ab.chunk.css.map",
+    "static/js/2.42929aef.chunk.js.LICENSE.txt": "/portfolio/static/js/2.42929aef.chunk.js.LICENSE.txt",
     "static/media/bizmerlin.png": "/portfolio/static/media/bizmerlin.dbbe9989.png",
-    "static/media/chatapp.jpg": "/portfolio/static/media/chatapp.36e59bb4.jpg",
     "static/media/dp.jpg": "/portfolio/static/media/dp.304dfc3e.jpg",
     "static/media/dutchgovt.png": "/portfolio/static/media/dutchgovt.c4d1918b.png",
     "static/media/fastmail.png": "/portfolio/static/media/fastmail.cefd4bf9.png",
     "static/media/google.png": "/portfolio/static/media/google.2de36850.png",
     "static/media/loadingGif.gif": "/portfolio/static/media/loadingGif.158162d1.gif",
-    "static/media/notesapp.JPG": "/portfolio/static/media/notesapp.41274126.JPG",
     "static/media/vista.png": "/portfolio/static/media/vista.d5a88e67.png"
   },
   "entrypoints": [
     "static/js/runtime-main.5676a5cc.js",
-    "static/js/2.903f04cd.chunk.js",
-    "static/css/main.4f29f1c4.chunk.css",
-    "static/js/main.86210895.chunk.js"
+    "static/js/2.42929aef.chunk.js",
+    "static/css/main.cad567ab.chunk.css",
+    "static/js/main.0354cac1.chunk.js"
   ]
 }
