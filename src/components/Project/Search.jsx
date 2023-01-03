@@ -29,10 +29,9 @@ const Search = (props)=>{
     }
     
     const filteredSuggestions=  ()=>{
-        var count=0
+        let count=0
         const tagarr = []
-        var val
-        for(val of tags){
+        for(let val of tags){
             if(count>=5)
                 break
             if(matchPrefix(val.toLowerCase(),inputvalue.toLowerCase())){
@@ -51,9 +50,9 @@ const Search = (props)=>{
     }
     const removeTag = (deleteval)=>{
         const temparr = showSelectedTags
-            var searchTerm = deleteval.slice(0, -1),
+            let searchTerm = deleteval.slice(0, -1),
                 index = -1;
-            for(var i = 0, len = temparr.length; i < len; i++) {
+            for(let i = 0, len = temparr.length; i < len; i++) {
                 if (temparr[i] === searchTerm) {
                     index = i;
                     break;
