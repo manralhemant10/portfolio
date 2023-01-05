@@ -19,7 +19,7 @@ TAGS_TO_DISPLAY = {
     bitmanipulation: 'Bit Manipulation',
     miscellaneous: 'Miscellaneous'
 },
-GITHUB_ALL = "https://api.github.com/users/manralhemant10/repos",
+GITHUB_ALL = "https://api.github.com/users/manralhemant10/repos?sort=created",
 techTags = [
     "Node.js","React.js","mern","php","javascript","Typescript","C++","Python","Bash"
 ]
