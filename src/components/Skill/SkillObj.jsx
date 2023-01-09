@@ -33,6 +33,10 @@ const SkillObj  ={
         },{
             name:"Expressjs",
             percent: 90
+        },
+        {
+            name:"Nestjs",
+            percent: 90
         },{
             name:"MicroServices",
             percent: 90
