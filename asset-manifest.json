@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.cad567ab.chunk.css",
-    "main.js": "/portfolio/static/js/main.c471ad3e.chunk.js",
-    "main.js.map": "/portfolio/static/js/main.c471ad3e.chunk.js.map",
-    "runtime-main.js": "/portfolio/static/js/runtime-main.5676a5cc.js",
-    "runtime-main.js.map": "/portfolio/static/js/runtime-main.5676a5cc.js.map",
-    "static/js/2.3ad1fb1b.chunk.js": "/portfolio/static/js/2.3ad1fb1b.chunk.js",
-    "static/js/2.3ad1fb1b.chunk.js.map": "/portfolio/static/js/2.3ad1fb1b.chunk.js.map",
+    "main.css": "/portfolio/static/css/main.2518cdf6.chunk.css",
+    "main.js": "/portfolio/static/js/main.f1353787.chunk.js",
+    "main.js.map": "/portfolio/static/js/main.f1353787.chunk.js.map",
+    "runtime-main.js": "/portfolio/static/js/runtime-main.41cc90cc.js",
+    "runtime-main.js.map": "/portfolio/static/js/runtime-main.41cc90cc.js.map",
+    "static/js/2.a8c12ccc.chunk.js": "/portfolio/static/js/2.a8c12ccc.chunk.js",
+    "static/js/2.a8c12ccc.chunk.js.map": "/portfolio/static/js/2.a8c12ccc.chunk.js.map",
     "index.html": "/portfolio/index.html",
-    "precache-manifest.46c7681a6940db5ccd2fcd14dd697d3d.js": "/portfolio/precache-manifest.46c7681a6940db5ccd2fcd14dd697d3d.js",
+    "precache-manifest.a20a600777845bf637e8e1bcc4f25b59.js": "/portfolio/precache-manifest.a20a600777845bf637e8e1bcc4f25b59.js",
     "service-worker.js": "/portfolio/service-worker.js",
-    "static/css/main.cad567ab.chunk.css.map": "/portfolio/static/css/main.cad567ab.chunk.css.map",
-    "static/js/2.3ad1fb1b.chunk.js.LICENSE.txt": "/portfolio/static/js/2.3ad1fb1b.chunk.js.LICENSE.txt",
+    "static/css/main.2518cdf6.chunk.css.map": "/portfolio/static/css/main.2518cdf6.chunk.css.map",
+    "static/js/2.a8c12ccc.chunk.js.LICENSE.txt": "/portfolio/static/js/2.a8c12ccc.chunk.js.LICENSE.txt",
     "static/media/bizmerlin.png": "/portfolio/static/media/bizmerlin.dbbe9989.png",
     "static/media/dp.jpg": "/portfolio/static/media/dp.304dfc3e.jpg",
     "static/media/dutchgovt.png": "/portfolio/static/media/dutchgovt.c4d1918b.png",
@@ -21,9 +21,9 @@
     "static/media/vista.png": "/portfolio/static/media/vista.d5a88e67.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.5676a5cc.js",
-    "static/js/2.3ad1fb1b.chunk.js",
-    "static/css/main.cad567ab.chunk.css",
-    "static/js/main.c471ad3e.chunk.js"
+    "static/js/runtime-main.41cc90cc.js",
+    "static/js/2.a8c12ccc.chunk.js",
+    "static/css/main.2518cdf6.chunk.css",
+    "static/js/main.f1353787.chunk.js"
   ]
 }
