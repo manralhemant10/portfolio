@@ -12,17 +12,12 @@ const SkillObj  ={
         {
             name :"TypeScript",
             percent : 80
+        },{
+            name:"Java",
+            percent: 90
         }
    ],
    "Web Development":[
-        {
-            name:"HTML",
-            percent: 90
-        },
-        {
-            name:"CSS",
-            percent: 90
-        },
         {
             name:"React",
             percent: 90
@@ -35,7 +30,11 @@ const SkillObj  ={
             percent: 90
         },
         {
-            name:"Nestjs",
+            name:"Spring Boot",
+            percent: 90
+        },
+        {
+            name:"Angular",
             percent: 90
         },{
             name:"MicroServices",
@@ -50,6 +49,19 @@ const SkillObj  ={
         {
             name:"MongoDb",
             percent: 60
+        },{
+            name:"Oracle",
+            percent: 90
+        }
+    ], 
+    "miscellaneous":[
+        {
+            name:"Srping Batch",
+            percent: 80
+        },
+        {
+            name:"Apache Spark",
+            percent: 80
         }
     ]
 }
