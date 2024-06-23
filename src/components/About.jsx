@@ -15,13 +15,9 @@ const About=()=>{
                 <div className="aboutPara">
                     <p>
                         Hello <span className="hiemoji">👋</span>,<br/>
-                        I am Hemant Singh Manral, currently working in Oracle as a Full Stack Developer with keen interest 
-                        in React.js and Node.js, I have hands-on experience of these technologies and also 
-                        working on personal projects using the same.
-                        Apart from this I have a good experience as a Bug Bounty Hunter, so My development
-                        always have a
-                        perspective of Security in it.  
-                        
+                        I'm Hemant Singh Manral, a versatile Full Stack Developer with a passion for solving complex problems across diverse tech stacks.
+                        My ability to adapt to new technologies and tackle challenging projects sets me apart. 
+                        From enhancing system resiliency to developing innovative applications, my work demonstrates my commitment to excellence.
                     </p>
                 </div>
             </div>
