@@ -1,5 +1,24 @@
 const ExperienceObj = {"exp":[
     {
+        title: "Senior Full Stack Developer",
+        company: "BNY",
+        duration: "June 2023 - present",
+        desc:`
+        <b>Tech stack: Spring Boot, Spring Batch, Spring JPA, Apache Spark, Angular, Oracle DB, MQ, Microservices</b><br>
+        - Developed and Optimized Spring Batch jobs to efficiently process millions of data lines from files and 
+        message notifications, incorporating complex business logic for rapid execution.</br>
+        - Implemented robust tracking and replay of user activities using Spring Boot to enhance the system's 
+        cyber resiliency.</br>
+        - Improved comparison scripts with Apache Spark and korn shell scripts to ensure readiness for 
+        production releases, enhancing data validation and reliability.</br>
+        - Ensured the smooth operation of lower environment batches and servers by proactively monitoring 
+        performance, diagnosing issues, and implementing effective resolutions to maintain optimal system 
+        functionality.</br>
+        - Worked closely with summer interns as mentor, providing comprehensive technical and business 
+        knowledge to facilitate their integration and professional growth alongside my daily responsibilities.</br>
+        `
+    },
+    {
         title: "Full Stack Developer",
         company: "Oracle Financial Services Software",
         duration: "Aug 2021 - present",
