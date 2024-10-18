@@ -1,5 +1,5 @@
 let CORS_PROXY= 'https://cors-proxy-kyez.onrender.com',
- LEETCODE_USER = 'manral',
+ LEETCODE_USER = 'MrTenHunter',
  LEETCODE_GRAPHQL = 'https://leetcode.com/graphql',
  STOPSTALK = {
     USER_ID: '91752'
