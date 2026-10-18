@@ -83,6 +83,7 @@ if (codeforcesHandle) {
     // Codeforces' public user.status API returns submission verdicts and problem metadata.
     // Count distinct accepted problem IDs, not accepted submissions.
     const accepted = new Map();
+    const submissionDays = new Map();
     let offset = 1;
     const batchSize = 1000;
     while (true) {
@@ -90,6 +91,10 @@ if (codeforcesHandle) {
         encodeURIComponent(codeforcesHandle) + '&from=' + offset + '&count=' + batchSize);
       if (response.status !== 'OK' || !Array.isArray(response.result)) throw new Error('Invalid Codeforces API response');
       for (const submission of response.result) {
+        if (Number.isFinite(submission.creationTimeSeconds)) {
+          const day = new Date(submission.creationTimeSeconds * 1000).toISOString().slice(0, 10);
+          submissionDays.set(day, (submissionDays.get(day) || 0) + 1);
+        }
         if (submission.verdict !== 'OK' || !submission.problem) continue;
         const problem = submission.problem;
         const key = String(problem.contestId ?? 'unknown') + ':' + String(problem.index ?? problem.name);
@@ -102,14 +107,16 @@ if (codeforcesHandle) {
     platforms.Codeforces = accepted.size;
     const cfTags = {};
     const cfHeat = Object.fromEntries(years.map(y => [String(y), Array(heatData[String(y)].length).fill(0)]));
-    for (const {problem, timestamp} of accepted.values()) {
-      for (const tag of problem.tags || []) cfTags[tag] = (cfTags[tag] || 0) + 1;
-      const d = new Date(timestamp * 1000);
+    for (const [date, count] of submissionDays) {
+      const d = new Date(date + 'T00:00:00Z');
       const year = String(d.getUTCFullYear());
       if (!cfHeat[year]) continue;
       const day = Math.floor((Date.UTC(+year, d.getUTCMonth(), d.getUTCDate()) - Date.UTC(+year, 0, 1)) / 86400000);
-      cfHeat[year][day]++;
-      heatData[year][day]++;
+      cfHeat[year][day] += count;
+      heatData[year][day] += count;
+    }
+    for (const {problem} of accepted.values()) {
+      for (const tag of problem.tags || []) cfTags[tag] = (cfTags[tag] || 0) + 1;
     }
     platformTags.Codeforces = cfTags;
     platformHeatData.Codeforces = cfHeat;
@@ -140,7 +147,7 @@ const output = {
   platformHeatData,
   profileLinks,
   sources: sourceStatus,
-  note: 'Solved totals are unique per platform and summed across platforms. LeetCode calendar counts submissions; Codeforces calendar counts distinct accepted problems.'
+  note: 'Solved totals are unique per platform and summed across platforms. LeetCode and Codeforces calendars count submissions (attempts), while solved totals count unique accepted problems per platform. Best streak uses the union of available platform activity days; unavailable sources may make it incomplete.'
 };
 await fs.mkdir('public/data', {recursive: true});
 await fs.writeFile('public/data/coding-stats.json', JSON.stringify(output) + '\n');
