@@ -1,44 +1,7 @@
-import React,{useState} from'react' 
-import { Heatmap } from "contribution-heatmap"
-
-const dayOfYear = date =>{
-    return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-} 
-const HeatMapContainer = (props)=>{
-   const {yearsToList, heatData} = props
-   const currDate = new Date()
-   const [year, setYear] = useState(currDate.getFullYear().toString())
-   const [squareNumber,setSquareNumber] = useState(365)
-   const onYearChange = (e)=>{
-    setYear(e.target.value)
-    // if(year===currDate.getFullYear().toString()){
-    //     setSquareNumber(dayOfYear(currDate))
-    // }
-    // else{
-    //     setSquareNumber(365)
-    // }
-   }
-    return (
-        <div className='heatMapContainer'>
-            <label for="years">Choose a year: </label>
-            <select className='dropDown' name="yearsDD" id="yearsDD" value={year} onChange={onYearChange}>
-            {
-                yearsToList.map((year)=>{
-                    return <option className='dropDown' value={year} >{year}</option>
-                })
-            }
-            </select>
-            <div className='heatmapDivWrapper'>
-            <Heatmap 
-                colour={['#232423','#2ec730', '#179c19', '#0b700d', '#024d03', '#013b01']} 
-                squareNumber={squareNumber} 
-                count={heatData[year]}
-                squareGap='4px'
-                squareSize='15px'
-            />
-            </div>
-        </div>
-    )
+import React,{useState} from 'react';
+export default function HeatMapContainer({yearsToList=[],heatData={}}){
+ const [selected,setSelected]=useState(String(new Date().getFullYear()));
+ const year=yearsToList.includes(selected)?selected:yearsToList[yearsToList.length-1];
+ if(!year)return <p>Activity calendar not available yet.</p>;
+ return <div><label htmlFor="coding-year">Year </label><select id="coding-year" value={year} onChange={e=>setSelected(e.target.value)}>{yearsToList.map(y=><option key={y} value={y}>{y}</option>)}</select><div className="coding-heatmap" role="img" aria-label={'Coding activity '+year}>{(heatData[year]||[]).map((count,i)=><span key={i} title={'Day '+(i+1)+': '+count+' submissions'} className={'coding-day level-'+(count===0?0:count<3?1:count<6?2:count<10?3:4)}/>)}</div></div>
 }
-
-export default HeatMapContainer
