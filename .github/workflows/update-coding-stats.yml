@@ -1,5 +1,11 @@
 name: Refresh coding statistics
 on:
+  push:
+    branches:
+      - improve/fast-coding-dashboard
+    paths:
+      - scripts/update-coding-stats.mjs
+      - .github/workflows/update-coding-stats.yml
   schedule:
     - cron: '37 3 * * *'
   workflow_dispatch:
