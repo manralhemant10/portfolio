@@ -14,7 +14,7 @@ const About=()=>{
                 </div>
                 <div className="aboutPara">
                     <p>
-                        Hello <span className="hiemoji">👋</span>,<br/>
+                        Hello <span className="hiemoji" role="img" aria-label="waving hand">👋</span>,<br/>
                         I'm Hemant Singh Manral, a versatile Full Stack Developer with a passion for solving complex problems across diverse tech stacks.
                         My ability to adapt to new technologies and tackle challenging projects sets me apart. 
                         From enhancing system resiliency to developing innovative applications, my work demonstrates my commitment to excellence.
