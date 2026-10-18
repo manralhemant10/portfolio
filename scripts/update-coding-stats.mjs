@@ -126,8 +126,97 @@ if (codeforcesHandle) {
     sourceStatus.Codeforces = 'unavailable';
   }
 }
-if (codechefHandle) sourceStatus.CodeChef = 'pending adapter';
-if (hackerrankHandle) sourceStatus.HackerRank = 'pending adapter';
+
+async function htmlRequest(url) {
+  const response = await fetch(url, {signal: AbortSignal.timeout(30000), headers: {
+    Accept: 'text/html,application/xhtml+xml', 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131.0 Safari/537.36'
+  }});
+  if (!response.ok) throw new Error('HTTP ' + response.status + ' from ' + url);
+  return response.text();
+}
+function newCalendar() {
+  return Object.fromEntries(years.map(y => [String(y), Array(heatData[String(y)].length).fill(0)]));
+}
+function recordCalendar(calendar, dateString, value) {
+  const date = new Date(dateString);
+  const count = Number(value);
+  if (!Number.isFinite(date.getTime()) || !Number.isFinite(count) || count <= 0) return;
+  const year = String(date.getUTCFullYear());
+  if (!calendar[year]) return;
+  const day = Math.floor((Date.UTC(+year, date.getUTCMonth(), date.getUTCDate()) - Date.UTC(+year, 0, 1)) / 86400000);
+  calendar[year][day] += count;
+}
+function mergeCalendar(calendar) {
+  for (const [year, counts] of Object.entries(calendar)) counts.forEach((n, day) => { heatData[year][day] += n; });
+}
+
+if (codechefHandle) {
+  try {
+    // CodeChef publishes the total and daily submissions inside public profile HTML.
+    const html = await htmlRequest(profileLinks.CodeChef);
+    const match = html.match(/Total Problems Solved\s*:?\s*<[^>]*>\s*(\d+)/i)
+      || html.match(/Total Problems Solved\s*:?\s*(\d+)/i);
+    if (!match) throw new Error('Solved count not found in CodeChef profile');
+    const count = Number(match[1]);
+    if (!Number.isSafeInteger(count)) throw new Error('Invalid solved count');
+    platforms.CodeChef = count;
+    const calendar = newCalendar();
+    const heat = html.match(/(?:var|let|const)\s+userDailySubmissionsStats\s*=\s*(\{[\s\S]*?\}|\[[\s\S]*?\])\s*;/);
+    if (heat) {
+      try {
+        const data = JSON.parse(heat[1]);
+        const entries = Array.isArray(data) ? data.map(item => [item.date || item.day, item.value ?? item.count ?? item.total]) : Object.entries(data);
+        for (const [day, count] of entries) recordCalendar(calendar, day, count);
+        mergeCalendar(calendar);
+      } catch (error) { console.warn('CodeChef heatmap parse failed: ' + error.message); }
+    } else console.warn('CodeChef profile did not expose heatmap data');
+    platformHeatData.CodeChef = calendar;
+    platformTags.CodeChef = {};
+    sourceStatus.CodeChef = heat ? 'available' : 'partial (no calendar)';
+  } catch (error) {
+    console.warn('CodeChef adapter failed: ' + error.message);
+    sourceStatus.CodeChef = 'unavailable';
+  }
+}
+if (hackerrankHandle) {
+  try {
+    const base = 'https://www.hackerrank.com/rest/hackers/' + encodeURIComponent(hackerrankHandle);
+    const calendar = newCalendar();
+    const history = await optional('HackerRank submission history', () => request(base + '/submission_histories', {
+      headers: {'User-Agent': 'Mozilla/5.0 Chrome/131.0 Safari/537.36'}
+    }));
+    const raw = history?.models || history?.model || history?.submission_histories || history?.data || history;
+    if (raw && typeof raw === 'object') {
+      const entries = Array.isArray(raw) ? raw.map(item => [item.date || item.timestamp || item.day, item.count ?? item.value ?? item.submissions ?? 1]) : Object.entries(raw);
+      for (const [day, count] of entries) recordCalendar(calendar, /^\d{10,13}$/.test(String(day)) ? Number(day) * (String(day).length === 10 ? 1000 : 1) : day, count);
+    }
+    const challenges = new Set();
+    let cursor = null;
+    for (let page = 0; page < 25; page++) {
+      const url = base + '/recent_challenges?limit=100&response_version=v2' + (cursor ? '&cursor=' + encodeURIComponent(cursor) : '');
+      const data = await request(url, {headers: {'User-Agent': 'Mozilla/5.0 Chrome/131.0 Safari/537.36'}});
+      const models = data.models || data.data?.models || [];
+      if (!Array.isArray(models)) throw new Error('Invalid HackerRank challenges response');
+      for (const item of models) {
+        const slug = item.ch_slug || item.slug || item.challenge?.slug;
+        if (slug) challenges.add(slug);
+      }
+      const next = data.cursor || data.next_cursor || data.pagination?.next_cursor;
+      if (!next || next === cursor || !models.length) break;
+      cursor = next;
+    }
+    if (!challenges.size) throw new Error('No verifiable solved challenge records');
+    platforms.HackerRank = challenges.size;
+    platformTags.HackerRank = {};
+    platformHeatData.HackerRank = calendar;
+    mergeCalendar(calendar);
+    sourceStatus.HackerRank = history ? 'available' : 'partial (no calendar)';
+  } catch (error) {
+    console.warn('HackerRank adapter failed: ' + error.message);
+    sourceStatus.HackerRank = 'unavailable';
+  }
+}
+
 let maxStreak = 0;
 let streak = 0;
 for (const year of years) {
