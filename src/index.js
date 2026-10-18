@@ -6,7 +6,7 @@ import './com.css'
 
 
 ReactDOM.render(
-  <BrowserRouter basename="/portfolio"> 
+  <BrowserRouter basename={process.env.REACT_APP_BASE_PATH || "/portfolio"}> 
      <App />
      </BrowserRouter>
 
