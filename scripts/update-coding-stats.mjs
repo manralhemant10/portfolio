@@ -3,6 +3,14 @@ import fs from 'node:fs/promises';
 const username = 'MrTenHunter';
 const firstYear = 2020;
 const currentYear = new Date().getUTCFullYear();
+const codeforcesHandle = process.env.CODEFORCES_HANDLE?.trim();
+const codechefHandle = process.env.CODECHEF_HANDLE?.trim();
+const hackerrankHandle = process.env.HACKERRANK_HANDLE?.trim();
+const sourceStatus = {LeetCode: 'available', Codeforces: 'not configured', CodeChef: 'not configured', HackerRank: 'not configured'};
+const profileLinks = {LeetCode: 'https://leetcode.com/u/' + username};
+if (codeforcesHandle) profileLinks.Codeforces = 'https://codeforces.com/profile/' + encodeURIComponent(codeforcesHandle);
+if (codechefHandle) profileLinks.CodeChef = 'https://www.codechef.com/users/' + encodeURIComponent(codechefHandle);
+if (hackerrankHandle) profileLinks.HackerRank = 'https://www.hackerrank.com/profile/' + encodeURIComponent(hackerrankHandle);
 const years = Array.from({length: currentYear - firstYear + 1}, (_, i) => firstYear + i);
 
 async function request(url, options = {}) {
@@ -67,6 +75,52 @@ for (let index = 0; index < years.length; index += 3) {
 }
 
 const platforms = {LeetCode: solved};
+const platformTags = {LeetCode: tags};
+const platformHeatData = {LeetCode: JSON.parse(JSON.stringify(heatData))};
+
+if (codeforcesHandle) {
+  try {
+    // Codeforces' public user.status API returns submission verdicts and problem metadata.
+    // Count distinct accepted problem IDs, not accepted submissions.
+    const accepted = new Map();
+    let offset = 1;
+    const batchSize = 1000;
+    while (true) {
+      const response = await request('https://codeforces.com/api/user.status?handle=' +
+        encodeURIComponent(codeforcesHandle) + '&from=' + offset + '&count=' + batchSize);
+      if (response.status !== 'OK' || !Array.isArray(response.result)) throw new Error('Invalid Codeforces API response');
+      for (const submission of response.result) {
+        if (submission.verdict !== 'OK' || !submission.problem) continue;
+        const problem = submission.problem;
+        const key = String(problem.contestId ?? 'unknown') + ':' + String(problem.index ?? problem.name);
+        if (!accepted.has(key)) accepted.set(key, {problem, timestamp: submission.creationTimeSeconds});
+      }
+      if (response.result.length < batchSize) break;
+      offset += batchSize;
+      if (offset > 50000) {console.warn('Codeforces history capped at 50,000 submissions');break;}
+    }
+    platforms.Codeforces = accepted.size;
+    const cfTags = {};
+    const cfHeat = Object.fromEntries(years.map(y => [String(y), Array(heatData[String(y)].length).fill(0)]));
+    for (const {problem, timestamp} of accepted.values()) {
+      for (const tag of problem.tags || []) cfTags[tag] = (cfTags[tag] || 0) + 1;
+      const d = new Date(timestamp * 1000);
+      const year = String(d.getUTCFullYear());
+      if (!cfHeat[year]) continue;
+      const day = Math.floor((Date.UTC(+year, d.getUTCMonth(), d.getUTCDate()) - Date.UTC(+year, 0, 1)) / 86400000);
+      cfHeat[year][day]++;
+      heatData[year][day]++;
+    }
+    platformTags.Codeforces = cfTags;
+    platformHeatData.Codeforces = cfHeat;
+    sourceStatus.Codeforces = 'available';
+  } catch (error) {
+    console.warn('Codeforces unavailable: ' + error.message);
+    sourceStatus.Codeforces = 'unavailable';
+  }
+}
+if (codechefHandle) sourceStatus.CodeChef = 'pending adapter';
+if (hackerrankHandle) sourceStatus.HackerRank = 'pending adapter';
 let maxStreak = 0;
 let streak = 0;
 for (const year of years) {
@@ -77,13 +131,16 @@ for (const year of years) {
 }
 const output = {
   updatedAt: new Date().toISOString(),
-  totalSolved: solved,
+  totalSolved: Object.values(platforms).reduce((sum, count) => sum + count, 0),
   maxStreak,
   platforms,
   tags,
   heatData,
-  sources: {LeetCode: 'available', StopStalk: 'unavailable'},
-  note: 'Problem totals reflect LeetCode only; activity calendar counts submissions.'
+  platformTags,
+  platformHeatData,
+  profileLinks,
+  sources: sourceStatus,
+  note: 'Solved totals are unique per platform and summed across platforms. LeetCode calendar counts submissions; Codeforces calendar counts distinct accepted problems.'
 };
 await fs.mkdir('public/data', {recursive: true});
 await fs.writeFile('public/data/coding-stats.json', JSON.stringify(output) + '\n');
