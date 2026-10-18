@@ -4,7 +4,7 @@ import constants from '../../Constants'
 
 const Search = (props)=>{
     const [inputvalue, setInputvalue] = useState("")
-    const [tags,setTags] = useState(constants.techTags)
+    const tags = constants.techTags
     const [showSelectedTags, setShowSelectedTags]=useState([])
     
     const inputChange=(event)=>{
