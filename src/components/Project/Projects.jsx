@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useCallback} from 'react'
 import axios from 'axios'
 import constants from '../../Constants'
 import ProjectCard from './ProjectCard'
@@ -10,7 +10,7 @@ import Search from './Search'
 const Projects =()=>{
     const [projObj, setProjObj] = useState([])
 
-    const convertTagStr = (techName)=>{
+    const convertTagStr = useCallback((techName)=>{
         let convertedName = ""
         for(let ch of techName){
             ch = ch.toLowerCase()
@@ -19,8 +19,8 @@ const Projects =()=>{
             }
         }
         return convertedName
-    }
-    let callGitHubApi = async(tagsArr)=>{
+    },[])
+    const callGitHubApi = useCallback(async(tagsArr)=>{
         let tagsArrLen = tagsArr?tagsArr.length:0
         let tagsSet
         if(tagsArrLen>0){
@@ -62,11 +62,11 @@ const Projects =()=>{
         }).finally(()=>{
             setProjObj([...projObjTemp])
         })
-    }
+    },[convertTagStr])
     useEffect(()=>{
      
         callGitHubApi();
-    },[])
+    },[callGitHubApi])
    
     return(
         <>
