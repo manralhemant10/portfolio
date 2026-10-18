@@ -3,9 +3,9 @@ import fs from 'node:fs/promises';
 const username = 'MrTenHunter';
 const firstYear = 2020;
 const currentYear = new Date().getUTCFullYear();
-const codeforcesHandle = process.env.CODEFORCES_HANDLE?.trim();
-const codechefHandle = process.env.CODECHEF_HANDLE?.trim();
-const hackerrankHandle = process.env.HACKERRANK_HANDLE?.trim();
+const codeforcesHandle = (process.env.CODEFORCES_HANDLE || 'mrtenhunter').trim();
+const codechefHandle = (process.env.CODECHEF_HANDLE || 'mrtenhunter').trim();
+const hackerrankHandle = (process.env.HACKERRANK_HANDLE || 'manralhemant10').trim();
 const sourceStatus = {LeetCode: 'available', Codeforces: 'not configured', CodeChef: 'not configured', HackerRank: 'not configured'};
 const profileLinks = {LeetCode: 'https://leetcode.com/u/' + username};
 if (codeforcesHandle) profileLinks.Codeforces = 'https://codeforces.com/profile/' + encodeURIComponent(codeforcesHandle);
@@ -134,7 +134,7 @@ const output = {
   totalSolved: Object.values(platforms).reduce((sum, count) => sum + count, 0),
   maxStreak,
   platforms,
-  tags,
+  tags: Object.entries(platformTags).reduce((acc, [,values]) => { for (const [tag, count] of Object.entries(values)) acc[tag] = (acc[tag] || 0) + count; return acc; }, {}),
   heatData,
   platformTags,
   platformHeatData,
@@ -144,4 +144,4 @@ const output = {
 };
 await fs.mkdir('public/data', {recursive: true});
 await fs.writeFile('public/data/coding-stats.json', JSON.stringify(output) + '\n');
-console.log('Saved LeetCode snapshot: ' + solved + ' problems, ' + successfulCalendars + ' calendar years');
+console.log('Saved coding snapshot: ' + JSON.stringify(platforms) + ', ' + successfulCalendars + ' LeetCode calendar years');
