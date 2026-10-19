@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  pages: write
 concurrency:
   group: portfolio-pages
   cancel-in-progress: true
@@ -37,3 +38,7 @@ jobs:
           git add -A
           git commit -m "Deploy portfolio from ${{ github.sha }}"
           git push --force "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" gh-pages
+      - name: Request GitHub Pages rebuild
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
+        env:
+          GH_TOKEN: ${{ github.token }}
