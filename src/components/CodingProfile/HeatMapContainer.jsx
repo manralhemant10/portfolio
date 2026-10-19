@@ -1,44 +1,16 @@
-import React,{useState} from'react' 
-import { Heatmap } from "contribution-heatmap"
-
-const dayOfYear = date =>{
-    return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-} 
-const HeatMapContainer = (props)=>{
-   const {yearsToList, heatData} = props
-   const currDate = new Date()
-   const [year, setYear] = useState(currDate.getFullYear().toString())
-   const [squareNumber,setSquareNumber] = useState(365)
-   const onYearChange = (e)=>{
-    setYear(e.target.value)
-    // if(year===currDate.getFullYear().toString()){
-    //     setSquareNumber(dayOfYear(currDate))
-    // }
-    // else{
-    //     setSquareNumber(365)
-    // }
-   }
-    return (
-        <div className='heatMapContainer'>
-            <label for="years">Choose a year: </label>
-            <select className='dropDown' name="yearsDD" id="yearsDD" value={year} onChange={onYearChange}>
-            {
-                yearsToList.map((year)=>{
-                    return <option className='dropDown' value={year} >{year}</option>
-                })
-            }
-            </select>
-            <div className='heatmapDivWrapper'>
-            <Heatmap 
-                colour={['#232423','#2ec730', '#179c19', '#0b700d', '#024d03', '#013b01']} 
-                squareNumber={squareNumber} 
-                count={heatData[year]}
-                squareGap='4px'
-                squareSize='15px'
-            />
-            </div>
-        </div>
-    )
+import React,{useState} from 'react';
+export default function HeatMapContainer({yearsToList=[],heatData={}}){
+ const [selected,setSelected]=useState(String(new Date().getFullYear()));
+ const year=yearsToList.includes(selected)?selected:yearsToList[yearsToList.length-1];
+ if(!year)return <p>Activity calendar not available yet.</p>;
+ const counts=heatData[year]||[];
+ const firstWeekday=(new Date(Date.UTC(Number(year),0,1)).getUTCDay()+6)%7;
+ const cells=[...Array(firstWeekday).fill(null),...counts];
+ const total=counts.reduce((sum,n)=>sum+n,0);
+ const active=counts.filter(n=>n>0).length;
+ return <div className="ec-calendar">
+   <div className="ec-calendar-head"><div><strong>{active}</strong> active days <span>· {total.toLocaleString()} recorded activities</span></div><label htmlFor="coding-year">YEAR <select id="coding-year" value={year} onChange={e=>setSelected(e.target.value)}>{yearsToList.map(y=><option key={y} value={y}>{y}</option>)}</select></label></div>
+   <div className="ec-calendar-scroll"><div className="ec-calendar-grid" role="img" aria-label={'Coding activity for '+year+', '+active+' active days'}>{cells.map((count,i)=>count===null?<span key={'pad-'+i} className="ec-calendar-empty"/>:<span key={i} title={new Date(Date.UTC(Number(year),0,i-firstWeekday+1)).toISOString().slice(0,10)+': '+count+' recorded activities'} className={'coding-day level-'+(count===0?0:count<3?1:count<6?2:count<10?3:4)}/>)}</div></div>
+   <div className="ec-calendar-legend">Less <span className="coding-day level-0"/><span className="coding-day level-1"/><span className="coding-day level-2"/><span className="coding-day level-3"/><span className="coding-day level-4"/> More</div>
+ </div>;
 }
-
-export default HeatMapContainer

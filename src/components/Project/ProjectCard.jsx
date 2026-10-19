@@ -10,7 +10,7 @@ const ProjectCard = (props)=>{
     return(
         <div className="projCard">
             <h1>{props.title}</h1>   
-                <a href={props.link} title="Click to visit the repo" target="_blank">
+                <a href={props.link} title="Click to visit the repo" target="_blank" rel="noopener noreferrer">
                     <div className="Repo">
                         <GitHubIcon style={Styles.smallsize} />
                         <span>Repo</span>

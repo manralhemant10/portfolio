@@ -1,0 +1,28 @@
+name: Refresh coding statistics
+on:
+  push:
+    branches:
+      - improve/fast-coding-dashboard
+    paths:
+      - scripts/update-coding-stats.mjs
+      - .github/workflows/update-coding-stats.yml
+  schedule:
+    - cron: '37 3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/update-coding-stats.mjs
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/coding-stats.json
+          git diff --staged --quiet || (git commit -m "chore: refresh coding stats" && git push)

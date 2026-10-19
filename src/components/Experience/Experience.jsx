@@ -1,44 +1,18 @@
-import React from 'react'
-import ExperienceSlider from './ExperienceSlider'
-import ExperienceObj from './ExperienceObj'
-import { useState } from 'react'
-import NavigateNextOutlinedIcon from '@material-ui/icons/NavigateNextOutlined';
+import React from 'react';
+import parse from 'html-react-parser';
+import ExperienceObj from './ExperienceObj';
+import '../engineeringConsole.css';
 
-const Experience=()=>{
-    
-    const [count,setCount] = useState(0)
-    const [show,setShow] = useState(ExperienceObj.exp[count])
-    const len = ExperienceObj.exp.length
-    const nextB = ()=>{
-        setCount((count+1)%len)
-        setShow(ExperienceObj.exp[(count+1)%len])
-    }
-    const prevB = ()=>{
-        setCount(((count-1)+len)%len)
-        setShow(ExperienceObj.exp[((count-1)+len)%len])
-    }
-    
-   
-    return(
-        <>
-        
-        <div className="ExperienceMain">
-            <div className="prevBtn">
-                <NavigateNextOutlinedIcon onClick={prevB} />
-            </div>
-            <div className="ExperienceOuter">
-                    <ExperienceSlider
-                        dis = {show}
-                        total = {ExperienceObj.exp.length}
-                        curCount = {count}
-                    />
-            </div>
-            <div className="nextBtn">
-                <NavigateNextOutlinedIcon onClick={nextB} />
-            </div>
-       </div>
-       </>
-    )
+export default function Experience(){
+ return <main className="ec-page">
+   <div className="ec-page-head"><span className="ec-kicker">01 / THE JOURNEY</span><h1>Built in production.<br/><em>Proven by impact.</em></h1><p>From banking APIs to critical market-data systems and security automation—here's where the work happened.</p></div>
+   <section className="ec-timeline" aria-label="Professional experience">
+     {ExperienceObj.exp.map((item,index)=><article className="ec-timeline-entry" key={item.company}>
+       <div className="ec-timeline-side"><span className="ec-timeline-index">0{index+1}</span><span className="ec-timeline-date">{item.duration}</span></div>
+       <div className="ec-timeline-node" aria-hidden="true"/>
+       <div className="ec-timeline-card"><div className="ec-card-top"><span>{item.company}</span><span>{index===0?'CURRENT ROLE':'EXPERIENCE'}</span></div><h2>{item.title}</h2><div className="ec-experience-copy">{parse(item.desc)}</div></div>
+     </article>)}
+   </section>
+   <div className="ec-endnote">ENGINEERING PRINCIPLE <strong>Make complex systems understandable, dependable, and secure.</strong></div>
+ </main>;
 }
-
-export default Experience
