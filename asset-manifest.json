@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/portfolio/static/css/main.f18643d6.chunk.css",
+    "main.js": "/portfolio/static/js/main.4739a4fc.chunk.js",
+    "main.js.map": "/portfolio/static/js/main.4739a4fc.chunk.js.map",
+    "runtime-main.js": "/portfolio/static/js/runtime-main.41cc90cc.js",
+    "runtime-main.js.map": "/portfolio/static/js/runtime-main.41cc90cc.js.map",
+    "static/js/2.7526cfe4.chunk.js": "/portfolio/static/js/2.7526cfe4.chunk.js",
+    "static/js/2.7526cfe4.chunk.js.map": "/portfolio/static/js/2.7526cfe4.chunk.js.map",
+    "index.html": "/portfolio/index.html",
+    "precache-manifest.6517ec7cc52198346ee453cb5f0ad902.js": "/portfolio/precache-manifest.6517ec7cc52198346ee453cb5f0ad902.js",
+    "service-worker.js": "/portfolio/service-worker.js",
+    "static/css/main.f18643d6.chunk.css.map": "/portfolio/static/css/main.f18643d6.chunk.css.map",
+    "static/js/2.7526cfe4.chunk.js.LICENSE.txt": "/portfolio/static/js/2.7526cfe4.chunk.js.LICENSE.txt",
+    "static/media/bizmerlin.png": "/portfolio/static/media/bizmerlin.dbbe9989.png",
+    "static/media/dutchgovt.png": "/portfolio/static/media/dutchgovt.c4d1918b.png",
+    "static/media/fastmail.png": "/portfolio/static/media/fastmail.cefd4bf9.png",
+    "static/media/google.png": "/portfolio/static/media/google.2de36850.png",
+    "static/media/vista.png": "/portfolio/static/media/vista.d5a88e67.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.41cc90cc.js",
+    "static/js/2.7526cfe4.chunk.js",
+    "static/css/main.f18643d6.chunk.css",
+    "static/js/main.4739a4fc.chunk.js"
+  ]
+}
